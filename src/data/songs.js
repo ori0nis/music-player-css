@@ -1,0 +1,42 @@
+export const songs = [
+  {
+    id: 0,
+    title: "Disease",
+    artist: "Lady Gaga",
+    duration: "3:49",
+    cover_art: "/cover-arts/disease.png",
+    src: "/music/Disease.mp3",
+  },
+  {
+    id: 1,
+    title: "Headphones on",
+    artist: "Addison Rae",
+    duration: "4:00",
+    cover_art: "cover-arts/headphones-on.jpeg",
+    src: "/music/Headphones On.mp3",
+  },
+  {
+    id: 2,
+    title: "Maha-Kali",
+    artist: "Dissection",
+    duration: "6:06",
+    cover_art: "/cover-arts/maha-kali.jpg",
+    src: "/music/Maha-Kali.mp3",
+  },
+  {
+    id: 3,
+    title: "Midnight Sun",
+    artist: "Zara Larsson",
+    duration: "3:09",
+    cover_art: "/cover-arts/midnight-sun.jpg",
+    src: "/music/Midnight Sun.mp3",
+  },
+  {
+    id: 4,
+    title: "Sports Car",
+    artist: "Tate McRae",
+    duration: "2:45",
+    cover_art: "/cover-arts/sports-car.jpg",
+    src: "/music/Sports car.mp3",
+  },
+];
