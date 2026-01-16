@@ -1,1 +1,20 @@
 @import "tailwindcss";
+
+@theme {
+  /* Small screen breakpoint */
+  --breakpoint-xs: 450px;
+  --breakpoint-small-player: 560px;
+
+  /* Animations */
+  --animate-metadata-marquee: metadataMarquee 30s linear infinite;
+
+  /* Keyframes */
+  @keyframes metadataMarquee {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+}

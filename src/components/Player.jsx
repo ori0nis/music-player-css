@@ -3,10 +3,10 @@ import { songs } from "../data/songs";
 import { Playlist } from "./Playlist";
 import { formatTime } from "../utils/formatTime";
 import { Button } from "./Button";
+import { MetadataAnimation } from "./MetadataAnimation";
 
-export const Player = () => {
+export const Player = ({ currentSong, songNumber, setSongNumber }) => {
   const audioRef = useRef(null);
-  const [songNumber, setSongNumber] = useState(0);
   const [shufflePlay, setShufflePlay] = useState(() => {
     return localStorage.getItem("play-mode") === "shuffle-play" ? true : false;
   });
@@ -15,9 +15,6 @@ export const Player = () => {
   /* Button states */
   const [isShuffleActive, setIsShuffleActive] = useState(shufflePlay);
   const [isPlayActive, setIsPlayActive] = useState(false);
-
-  /* const isPauseActive = false; */
-  const currentSong = songs[songNumber];
 
   /* useEffect() flags which song needs to play, makes sure autoplay works */
   useEffect(() => {
@@ -90,13 +87,12 @@ export const Player = () => {
   };
 
   return (
-    <div className="m-auto max-w-2xl w-full bg-red-500 flex flex-col gap-40">
-      <div className="flex w-fit m-auto gap-4">
+    <div className="m-auto max-w-2xl w-full flex flex-col gap-13 pb-8">
+      <div className="flex flex-col small-player:flex-row w-fit m-auto gap-2 rounded-lg mt-15 bg-gray-100/60">
         <img src={currentSong.cover_art} alt={currentSong.title} className="rounded-xl w-60 h-auto" />
-        <div className="flex flex-col">
-          <p>
-            {currentSong.title} - {currentSong.artist}
-          </p>
+        <div className="flex flex-col justify-center p-2">
+          <p className="text-center font-semibold text-xl">{currentSong.title}</p>
+          <p className="text-center text-md">{currentSong.artist}</p>
 
           {/* Audio */}
           <audio
@@ -126,20 +122,22 @@ export const Player = () => {
           >
             <div className="h-2 bg-orange-400 rounded-lg" style={{ width: `${progress}%` }}></div>
           </div>
-          <p>{formatTime(songDuration)}</p>
+          <p className="py-1">{formatTime(songDuration)}</p>
 
           {/* Control buttons */}
-          <div className="grid grid-cols-[50px_50px_50px_50px] gap-1">
+          <div className="grid grid-cols-[50px_50px_50px_50px] gap-1 justify-center">
             <Button id="prev" onClick={prevSong} />
             <Button id="play" onClick={playSong} isActive={isPlayActive} />
             <Button id="pause" onClick={pauseSong} isActive={!isPlayActive} />
             <Button id="next" onClick={nextSong} />
             <Button id="shuffle" onClick={toggleShuffle} isActive={isShuffleActive} />
-            <Button id="plus-5" onClick={() => (audioRef.current.currentTime += 5)} />
             <Button id="minus-5" onClick={() => (audioRef.current.currentTime -= 5)} />
+            <Button id="plus-5" onClick={() => (audioRef.current.currentTime += 5)} />
           </div>
         </div>
       </div>
+
+      <MetadataAnimation currentSong={currentSong} />
 
       <Playlist playSong={playSongFromPlaylist} />
     </div>
